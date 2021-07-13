@@ -62,7 +62,8 @@ body {
 }
 
 .box {
-  /*padding: 20px;*/
+  /* padding: 20px; */
+  margin-top: 50px;
   border: 1px solid #000;
   position: relative;
 }
@@ -81,8 +82,14 @@ body {
 .smiley {
   vertical-align: middle;
   height: 75%;
-
   object-fit: contain;
+}
+
+.smiley::after {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
 }
 
 .flip-in-ver-right {
@@ -97,9 +104,8 @@ body {
 } */
 
 .txt {
-  display: inline-block;
-  /* vertical-align: middle; */
+  /* display: inline-block; */
+
   padding: 10px 15px;
-  position: relative;
   font-weight: bold;
 }

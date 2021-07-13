@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import results from '../img/results-loading.png'
 
-const SecondTestingOverlay = () => {
+const ThirdTestingOverlay = () => {
   return (
     <Fragment>
       <div className='box small'>
@@ -63,4 +63,4 @@ const SecondTestingOverlay = () => {
   )
 }
 
-export default SecondTestingOverlay
+export default ThirdTestingOverlay
