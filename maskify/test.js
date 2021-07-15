@@ -44,7 +44,25 @@ console.log('AFTER SPLICE: ' + otherArray)
 
 const superArray = [1, 2, '-', 3, 2, '-', 4, 2, '-', 5, 2]
 
-superArray.forEach(i => (i === '-' ? otherArray.splice(i, 1) : null))
+//const newSuperArray =
+console.log(
+  superArray.forEach(i => {
+    //{console.log("index "+i)
+    i === '-' ? otherArray.splice(i, 1) : null
+  })
+) // undefined mas nao percebo porque
+
+//console.log("NEW SUPER ARRAY: "+newSuperArray)
 
 console.log(superArray.length)
 console.log('SUPER ARRAY AFTER SPLICE: ' + superArray.length)
+
+const array = 'A1234567BCDEFG89HI'
+
+const maskArray = array => {
+  const firstChar = creditCardArray[0] // determines the first digit that is meant to be returned as is
+  const arrMinusFirstChar = creditCardArray.slice(1) // determines the array minus the first index
+  const lastFourChar = arrMinusFirstChar.slice(arrMinusFirstChar.length - 4) // determines the last four digits that also are to not be masked
+  const charToMask = arrMinusFirstChar.slice(0, arrMinusFirstChar.length - 4)
+  let maskedChar = ''
+}
