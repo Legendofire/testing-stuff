@@ -37,7 +37,7 @@ const maskify = creditCard => {
     console.log('TO MASK: ' + charToMask)
     // using a for loop to determine which characters are numbers and should be masked
     for (let i = 0; i <= charToMask; i++) {
-      maskedChar = Number(charToMask[i]) = '#') : null
+      maskedChar = Number(charToMask[i]) = '#'
       return maskedChar
     }
     console.log(maskedChar)
