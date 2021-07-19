@@ -1,15 +1,15 @@
-console.log('HELLO, WORLD')
+console.log('1234-5678-9101-1231')
 
 // this function masks the argument when it is a string that includes numbers
 const maskStr = creditCard => {
   const creditCardArray = creditCard.toString().split('')
-  let numbersToMask = []
-  let unmaskedChar = []
-  let maskedNumbers = []
+  let indexToMask = []
+  let unmaskedIndex = []
+  let maskedIndex = []
   let maskedCreditCardArray = []
-  const firstChar = creditCardArray[0]
+  const firstIndex = creditCardArray[0]
   // determines the first digit that is meant to be returned as is
-  const arrMinusFirstChar = creditCardArray.slice(1)
+  const arrMinusFirstIndex = creditCardArray.slice(1)
   // determines the array minus the first index
   const lastFourChar = arrMinusFirstChar.slice(arrMinusFirstChar.length - 4)
   // determines the last four digits that also are to not be masked
@@ -38,3 +38,17 @@ const maskStr = creditCard => {
 }
 
 maskStr('A1234567BCDEFG89HI')
+maskStr('1234-5678-9101-1231') // couldn't find a solution for this case
+
+function splitArrayIntoChunksOfLen(arr, len) {
+  var chunks = [],
+    i = 0,
+    n = arr.length
+  while (i < n) {
+    chunks.push(arr.slice(i, (i += len)))
+  }
+  return chunks
+}
+var alphabet = ['a', 'b', 'c', 'd', 'e', 'f']
+var alphabetPairs = splitArrayIntoChunksOfLen(alphabet, 2)
+console.log(alphabetPairs)
