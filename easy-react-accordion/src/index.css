@@ -24,6 +24,28 @@ header {
   align-content: center;
   padding: 15px;
   background-color: #3c3c3c;
+}
+
+header h1 {
+  color: #eee;
+  font-size: 28;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.faqs {
+  width: 100%;
+  max-width: 768px; /* iPad size */
+  margin: 0 auto;
+  padding: 25px;
+}
+
+/* header {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 15px;
+  background-color: #3c3c3c;
   border-bottom: 3px solid #56e3b8;
 }
 
@@ -92,4 +114,4 @@ header h1 {
 .faqs .faq.open .faq-answer {
   max-height: 1000px;
   opacity: 1;
-}
+} */
