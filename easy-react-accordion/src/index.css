@@ -55,6 +55,7 @@ header h1 {
   font-size: 20px;
   padding-right: 80px;
   transition: all 0.4 ease;
+  cursor: pointer;
 }
 
 .faqs .faq .faq-question::after {

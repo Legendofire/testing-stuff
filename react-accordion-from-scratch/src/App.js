@@ -1,35 +1,48 @@
+import React, { useState } from 'react'
 import './App.css'
 
 function App() {
+  const [selected, setSelected] = useState(null)
+
+  const toggle = i => {
+    if (selected === i) {
+      return setSelected(null)
+    } else {
+      setSelected(i)
+    }
+  }
+  const data = [
+    {
+      question: 'Question 1?',
+      answer: 'Answer to question 1',
+    },
+    {
+      question: 'Question 2?',
+      answer: 'Answer to question 2.',
+    },
+    {
+      question: 'Question 3?',
+      answer: 'Answer to question 3.',
+    },
+  ]
+
   return (
     <div className='wrapper'>
       <div className='accordion'>
         {data.map((item, i) => (
           <div className='item'>
-            <div className='title'>
+            <div className='title' onClick={() => toggle(i)}>
               <h2>{item.question}</h2>
+              <span>{selected === i ? '-' : '+'}</span>
             </div>
-            <div className='answer'>{item.answer}</div>
+            <div className={selected === i ? 'content show' : 'content'}>
+              {item.answer}
+            </div>
           </div>
         ))}
       </div>
     </div>
   )
 }
-
-const data = [
-  {
-    question: 'How many programmers does it take to screw in a lightbulb?',
-    answer: "None. We don't address hardware issues.",
-  },
-  {
-    question: 'Who is the most awesome person?',
-    answer: 'You. The Viewer.',
-  },
-  {
-    question: 'How many questions does it take to make a successful FAQ Page?',
-    answer: 'This many.',
-  },
-]
 
 export default App
