@@ -5,7 +5,7 @@ const FAQ = ({ faq, index, toggleFAQ }) => {
   return (
     <div
       className={'faq ' + (faq.open ? 'open' : '')}
-      key={index}
+      // key={index}
       onClick={() => toggleFAQ(index)}
     >
       {/* when you loop through react to display things using map, we need to give the component a key  */}

@@ -40,7 +40,7 @@ const App = () => {
       <Header />
       <div className='faqs'>
         {faqs.map((faq, i) => (
-          <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} />
+          <FAQ faq={faq} key={i} toggleFAQ={toggleFAQ} />
         ))}
       </div>
     </div>
