@@ -30,7 +30,7 @@ function App() {
     <div className='wrapper'>
       <div className='accordion'>
         {data.map((item, i) => (
-          <div className='item'>
+          <div className='item' key={i}>
             <div className='title' onClick={() => toggle(i)}>
               <h2>{item.question}</h2>
               <span>{selected === i ? '-' : '+'}</span>
