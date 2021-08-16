@@ -11,7 +11,7 @@ const App = () => {
     },
     {
       question: 'Who is the most awesome person?',
-      answer: 'You. The Viewer.',
+      answer: 'You are.',
       open: false,
     },
     {
@@ -40,7 +40,7 @@ const App = () => {
       <Header />
       <div className='faqs'>
         {faqs.map((faq, i) => (
-          <FAQ faq={faq} key={i} toggleFAQ={toggleFAQ} />
+          <FAQ faq={faq} index={i} key={i} toggleFAQ={toggleFAQ} />
         ))}
       </div>
     </div>
