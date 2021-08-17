@@ -78,7 +78,7 @@ header h1 {
   max-height: 0; /* because we cant animate height to auto */
   overflow-y: hidden;
   /* display: none */
-  /* the reason why he haven'T a display none is because you want to animate it growing bigger in and not just jumping straight in */
+  /* the reason why he haven't a display none is because you want to animate it growing bigger in and not just jumping straight in */
   transition: all 0.4s ease-out; /* this is what makes the transition smooth */
 }
 

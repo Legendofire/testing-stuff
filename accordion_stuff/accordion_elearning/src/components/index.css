@@ -1,0 +1,66 @@
+.accordion__item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #B7B2B2;  
+    padding-bottom: 2vh;
+  }
+
+  .accordion__button {
+    cursor: pointer;
+    color: #444;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    outline: none;
+    justify-content: space-between;
+    /* padding-bottom: 1rem; */
+  }
+
+  .accordion:focus {
+    outline: none;
+  }
+
+  .accordion:hover, .active {
+    background-color: transparent;
+    outline: none !important;
+  }
+
+  .accordion__title {
+    text-align: left;
+    transition: 0.4s;
+    color: #1F2020;
+    font-family: "Lato";  
+  }
+
+  .accordion__icon {
+    margin-left: auto;
+    width: 23px;
+    height: 30px;
+  
+  }
+
+  .rotate {
+    transform: rotate(180deg);
+    background-color: red;
+  }   /* IS NOT WORKING with the ternary operator*/
+
+
+  .content{
+    background-color: red;
+    max-height: 0;
+    overflow-y: hidden;
+    /* position: relative; */
+/*     
+    transition: max-height 650ms; */
+    -webkit-transition: max-height .35s;
+    -o-transition: max-height .35s;
+    transition: max-height .35s;
+  }
+
+  .content .show {
+    height: auto;
+    max-height: 9999px;
+    transition: all 0.3s ease-out;
+    /* cubic-bezier(0, 1, 0, 1); */
+  }
