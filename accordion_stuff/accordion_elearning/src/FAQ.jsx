@@ -1,5 +1,5 @@
 
-const App = () =>{
+const FAQ = () =>{
   return (
     <div className="App">
     <h1>Raquel</h1>
@@ -7,4 +7,4 @@ const App = () =>{
   );
 }
 
-export default App;
+export default FAQ;
