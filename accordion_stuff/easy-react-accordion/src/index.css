@@ -79,7 +79,7 @@ header h1 {
   overflow-y: hidden;
   /* display: none */
   /* the reason why he haven'T a display none is because you want to animate it growing bigger in and not just jumping straight in */
-  transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out; /* this is what makes the transition smooth */
 }
 
 .faqs .faq.open .faq-question {
