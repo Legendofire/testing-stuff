@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   const [selected, setSelected] = useState(null)
 
-  const toggle = i => {
+  const toggle = i  => {
     if (selected === i) {
       return setSelected(null)
     } else {

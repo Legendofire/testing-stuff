@@ -1,9 +1,26 @@
+*{
+  margin: 0
+}
+
+
+
+@media only screen and (orientation: landscape) {
+  .landscapeOnly {
+    margin-top: 0;
+  }
+  .portraitOnly {
+    margin-top: 3rem;
+  }
+}
+
+
+
 .accordion__item {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid #B7B2B2;  
-    padding-bottom: 2vh;
+    /* margin-bottom: 2rem; */
+    /* padding-top: 2vh; */
+    /* padding-bottom: 2vh; */
   }
 
   .accordion__button {
@@ -11,22 +28,22 @@
     color: #444;
     cursor: pointer;
     display: flex;
-    align-items: center;
-    outline: none;
     justify-content: space-between;
-    /* padding-bottom: 1rem; */
+    align-items: center;
+    /* outline: none; */
+    border-bottom: 1px solid #B7B2B2;  
+    padding-bottom: 0.5rem;
   }
 
-  .accordion:focus {
-    outline: none;
-  }
-
-  .accordion:hover, .active {
+  /* .accordion:hover, .show {
     background-color: transparent;
     outline: none !important;
-  }
+  } */
 
   .accordion__title {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
     text-align: left;
     transition: 0.4s;
     color: #1F2020;
@@ -40,27 +57,47 @@
   
   }
 
-  .rotate {
-    transform: rotate(180deg);
-    background-color: red;
-  }   /* IS NOT WORKING with the ternary operator*/
-
-
   .content{
-    background-color: red;
     max-height: 0;
     overflow-y: hidden;
-    /* position: relative; */
-/*     
-    transition: max-height 650ms; */
-    -webkit-transition: max-height .35s;
-    -o-transition: max-height .35s;
-    transition: max-height .35s;
+    margin-bottom: 1vh;
+
+    /* position: relative; */    
+    -webkit-transition: max-height .35s; /* THIS WORKS, DO NOT TOUCH */
+    -o-transition: max-height .35s; /* THIS WORKS, DO NOT TOUCH */
+    transition: max-height .35s; /* THIS WORKS, DO NOT TOUCH */
   }
 
-  .content .show {
-    height: auto;
-    max-height: 9999px;
-    transition: all 0.3s ease-out;
+  .show {
+    max-height: 50rem;
+    overflow: auto;
+    margin-bottom: 1rem;
+    
+    
+    
+    /* THIS TRANSITION ISN'T WORKING */
     /* cubic-bezier(0, 1, 0, 1); */
+  }
+
+  /* .accordion__button:hover .accordion__icon {
+    transform: rotate(180deg)  } */
+
+  .rotate {
+    border-bottom: none;
+    }
+
+  .rotate .accordion__icon{
+    transform: rotateX(180deg);
+    transition: transform 1s;
+}
+
+  /* STYLING CONTACT US COMPONENT */
+
+  .kontakt{
+      font-weight: bold;
+      color: #eb5e4c 
+  }
+  
+  .kontakt:hover{
+      color: #e2a69e 
   }

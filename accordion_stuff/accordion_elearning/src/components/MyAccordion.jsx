@@ -1,38 +1,48 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
+import {FAQ} from "../FAQ"
+import ContactUs from './ContactUs'
 import "./index.css"
 
 
-const MyAccordion = ({ item, index }) => {
-    const [selected, setSelected] = useState(null)
+const MyAccordion = () => {
+  const [clicked, setClicked] = useState(null)
 
-    const toggle = index => {
-      if (selected === index) {
-        return setSelected(null)
-      } else {
-        setSelected(index)
-      }
+  const toggle = index => { 
+    clicked === index ? setClicked(null) : setClicked(index)
+  }
+
+return (
+  <div className="accordion__item">
+    {FAQ.map((item, index) => {
+        return (
+          <Fragment key={index}>
+            <div className={`accordion__button ${clicked === index && 'rotate'}`}
+                 onClick={() => toggle(index)}>
+            
+              <p className="accordion__title" >
+                {item.title}
+              </p>
+            
+              <img
+                src='/icons/collapser.svg'
+                className="accordion__icon"
+                alt="arrow pointing down"
+              />
+            </div>
+          <div className={clicked === index ? 'show' : 'content'}>
+
+              <p >
+              {item.content}
+              </p>
+          </div>
+              
+           
+          </Fragment>
+           )
+      })}
+       <ContactUs/>
+      </div>)
     }
-     return (
-      <div
-        className="accordion__item"
-        key={index}
-      
-      >
-        {/* when you loop through react to display things using map, we need to give the component a key  */}
-        <button className="accordion__button"
-          >
-          <p className="accordion__title" onClick={() => toggle(index)}>
-          {item.title}
-          </p>
-          <img
-            src='/icons/collapser.svg'   
-            className="accordion__icon"
-          />
-        </button>
-        <div className={selected === index ? 'content show' : 'content'}>{item.content}</div>
-      </div>
-    );
-  };
-  
- 
-export default MyAccordion
+
+
+  export default MyAccordion
