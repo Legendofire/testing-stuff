@@ -36,22 +36,3 @@ export const FAQ = [
     },
   
   ];
-
-
-//   return (
-//     <Fragment>
-//       <div className="container mx-auto md:p-16 p-6  md:w-8/12 lg:w-8/12 xl:w-10/12 text-left pb-20">
-//         <div className="flex flex-col mt-4 z-30">
-//           {items.map((item, i) => (
-//             <MyAccordion item={item} index={i} key={i} />
-//           ))}
-//         </div>
-//       </div>
-//       <div>
-      
-//       </div>
-//     </Fragment>
-//   );
-// };
-
-

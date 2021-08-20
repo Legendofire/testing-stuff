@@ -1,0 +1,33 @@
+.accordion{
+    margin: 0 180px;
+    
+  }
+  
+  .accordion-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center ;
+    cursor: pointer;
+    padding: 10px;
+    
+  }
+  
+  .accordion-header:hover{
+    background-color: #eee;
+  }
+  
+  .accordion-image{
+    width: 70px
+  }
+  
+  .accordion-indicator{
+    font-size: 30px;
+    width: 5px;
+    padding-right: 10px;
+  }
+  
+  .accordion-body{
+    text-align: justify;
+    font-size: 20px;
+    padding: 0 10px;
+  }
