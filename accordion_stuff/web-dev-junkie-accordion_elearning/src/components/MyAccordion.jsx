@@ -1,26 +1,19 @@
 import React, { useState, Fragment } from 'react'
-import {FAQ} from "../FAQ"
-import ContactUs from './ContactUs'
 import "./index.css"
 
 
-const MyAccordion = () => {
-  const [clicked, setClicked] = useState(null)
-
-  const toggle = index => { 
-    clicked === index ? setClicked(null) : setClicked(index)
-  }
+const MyAccordion = (title, content) => {
+  const [isOpen, setIsOpen] = useState(false)
 
 return (
-  <div className="accordion__item">
-    {FAQ.map((item, index) => {
-        return (
+  <div className="accordion__item"
+  >
+    {items.map((item, index) => (
           <Fragment key={index}>
-            <div className={`accordion__button ${clicked === index && 'rotate'}`}
-                 onClick={() => toggle(index)}>
-            
-              <p className="accordion__title" >
-                {item.title}
+            <div className={`accordion__button ${isOpen === index && 'rotate'}`}
+                 onClick={() => setIsOpen(!isOpen)}>
+            <p className="accordion__title" >
+                {title}
               </p>
             
               <img
@@ -29,20 +22,20 @@ return (
                 alt="arrow pointing down"
               />
             </div>
-          <div className={clicked === index ? 'show' : 'content'}>
+            {isOpen &&
+          <div className="show">
 
-              <p >
-              {item.content}
-              </p>
-          </div>
+              
+              {content}
+              
+          </div>}
               
            
-          </Fragment>
-           )
-      })}
-       <ContactUs/>
-      </div>)
-    }
+          </Fragment>))}
+
+
+      </div>)}
+    
 
 
   export default MyAccordion

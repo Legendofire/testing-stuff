@@ -1,4 +1,4 @@
-export const FAQ = [
+export default [
     {
       title: "Was ist #seiDUAL-E-Learning-Platform?",
       content:
