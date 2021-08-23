@@ -6,7 +6,7 @@ const Card = (props) => {
 
         setTimeout(() => { // this gives the event enough delay for us to see the card that we are dragging, instead of rendering it invisible immediately
          target.style.display = "none";
-        }, 0);
+        });
     }
 
     const dragOver = e => {
@@ -19,7 +19,7 @@ const Card = (props) => {
             className={props.className}
             draggable={props.draggable} // you can set it to false for a specific card that you don't want to be draggable 
             onDragStart={dragStart}
-            onDragOver={dragOver}
+            //onDragOver={dragOver}
         >
             {props.children}    
         </div>
