@@ -5,7 +5,7 @@ const Card = (props) => {
         e.dataTransfer.setData('card_id', target.id);
 
         setTimeout(() => { // this gives the event enough delay for us to see the card that we are dragging, instead of rendering it invisible immediately
-            target.style.display = "none";
+         target.style.display = "none";
         }, 0);
     }
 
