@@ -1,11 +1,10 @@
 import './App.css';
-import Knight from './components/Knight';
+import Board from './components/Board'
 
 function App() {
   return (
     <div className="App">
-     <h1>Drag and Drop Raquel</h1>
-     <Knight/>
+    <Board/>
     </div>
   );
 }

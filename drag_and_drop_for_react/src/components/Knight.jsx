@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Knight = () => {
     return (
         <span>♘</span>
