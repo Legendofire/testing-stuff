@@ -19,7 +19,7 @@ const Card = (props) => {
             className={props.className}
             draggable={props.draggable} // you can set it to false for a specific card that you don't want to be draggable 
             onDragStart={dragStart}
-            //onDragOver={dragOver}
+            onDragOver={dragOver}
         >
             {props.children}    
         </div>

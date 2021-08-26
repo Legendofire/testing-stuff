@@ -9,11 +9,12 @@ function App() {
           <Card id="card-1" className="card" draggable="true">
             <p>Card One</p>
           </Card>
-          <Card id="card-2" className="card" draggable="true">
-            <p>Card Two</p>
-          </Card>
         </Board>
         <Board id="board-1" className="board">
+          <Card id="card-2" className="card" draggable="true">
+          <img src="/img/dimitry-b-d6awfgWt3yI-unsplash.jpg" alt="" draggable="true"/>
+          
+          </Card>
         </Board>
       </main>
     </div>
