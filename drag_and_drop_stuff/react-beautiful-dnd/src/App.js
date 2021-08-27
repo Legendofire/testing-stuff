@@ -1,15 +1,22 @@
 import React, {useState} from 'react'
 import initialData from './initial-data'
+import Column from "./Column"
 
-const App = () => {
-const [initialData, setInitialData] = useState(initialData)
+const App = (props) => {
+const [data, setData] = useState(initialData)
 
+
+const sthWithColumns =
+    setData(initialData.columns.map(columnId => {
+        const column = initialData.columns[columnId]
+        const tasks = column.taskIds.map(taskId => initialData.tasks[taskId])
+    
+ }))
 return(
-
-    setState = () => columnOrder.map(columnId =>{
-
-    })
+    <Column/>
 )
+
+
 }
 
 export default App
