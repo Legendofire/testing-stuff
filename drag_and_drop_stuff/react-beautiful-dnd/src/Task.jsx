@@ -3,20 +3,30 @@ import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd';
 
 const Container = styled.div`
-    border: 1px solid lightgrey;
-    border-radius: 2px;
+    border: 3px solid lightgrey;
+    border-radius: 50%;
     padding: 8px;
-    margin-bottom: 8px;
+    //margin-bottom: 8px;
+    margin-right: 8px; //for horizontal lists
+    width: 40px; //for horizontal lists
+    height: 40px; //for horizontal lists
     color: white;
-    display: flex;
+    display: flex; //for horizontal lists
+    justify-content: center; //for horizontal lists
+    align-items: center; //for horizontal lists
     background-color: ${props =>
         props.isDragDisabled
         ? 'darkgreen'
         : props.isDragging
             ? 'grey'
-            : 'purple'}`
-    // this is a nested ternary statement to conditionally set the background-color to 'darkgreen' if a draggable is disabled; isDragDisabled will prevent a Draggable from being dragged but it will still be orderable within the list
-        
+            : 'purple'};
+            // this is a nested ternary statement to conditionally set the background-color to 'darkgreen' if a draggable is disabled; isDragDisabled will prevent a Draggable from being dragged but it will still be orderable within the list
+    &:focus {
+        outline: none;
+        border-color: red;
+    }        
+    `
+
         
         
     // conditionally styling the background
@@ -52,8 +62,8 @@ const Task = props => {
                 >
                 {/* <Handle {...provided.dragHandleProps} */}
 
-                 {console.log("O QUE SE PASSA AQUI")}
-                 {props.task.content}
+                {props.task.content[0]}
+                {/* just prints out the first character of the task */}
             </Container>)}
         </Draggable>
     )

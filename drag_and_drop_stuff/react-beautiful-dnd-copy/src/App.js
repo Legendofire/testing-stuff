@@ -20,9 +20,22 @@ const Container = styled.div`
 const App = () => {
    
     const [state, setState] = useState(initialData)
+
+    
+    const onDragStart = start => {
+        const homeIndex = state.columnOrder.indexOf(start.source.droppableId)
+        setState({
+            ...state,
+            homeIndex,
+        })
+    }
     
     const onDragEnd = result => {
-    // it is the responsibility of your onDrag function to synchronously update your state to reflect the Drag and Drop result
+        setState({
+            ...state,
+            homeIndex: null,
+        })
+        // it is the responsibility of your onDrag function to synchronously update your state to reflect the Drag and Drop result
         const  {destination, source, draggableId} = result
 
         if(!destination){
@@ -87,7 +100,7 @@ const App = () => {
 
     return (
     <DragDropContext
-        //onDragStart
+        onDragStart={onDragStart}
         //onDragUpdate // called when something changes during a drag
         onDragEnd={onDragEnd}
         // called at the end of a drag (this is the ONLY REQUIRED CALLBACK for the DragDropContext)
@@ -97,12 +110,20 @@ const App = () => {
         <Container>
 
 
-    {state.columnOrder.map(columnId => {
+    {state.columnOrder.map((columnId, index) => {
         const column = state.columns[columnId]
-        const tasks = column.taskIds.map(taskId => state.tasks[taskId])
+        const tasks = column.taskIds.map(
+            taskId => state.tasks[taskId],
+            )
         
+        const isDropDisabled = index < state.homeIndex
+
         return (
-            <Column key={column.id} column={column} tasks={tasks}/>
+            <Column
+                key={column.id}
+                column={column}
+                tasks={tasks}
+                isDropDisabled={isDropDisabled}/>
             )
         })}
         </Container>

@@ -11,23 +11,26 @@ const Container = styled.div`
 
 const App = () => {
 
+    // it will be the responsibility of App to render our Columns
+    const [state, setState] = useState(initialData)
 
-    const [toDoList, setToDoList] = useState(initialData)
-
-    // const onDragStart = start => {
-    //     const homeIndex = initialData.columnOrder.indexOf(start.source.droppableId)
+    const onDragStart = start => {
+        const homeIndex = state.columnOrder.indexOf(start.source.droppableId)
         
 
-    //     setToDoList({
-    //         homeIndex,
-    //     })
-    // }
+        setState({
+            ...state,
+            homeIndex,
+         })
+    }
 
     const onDragEnd = result => {
 
-        // setToDoList({
-        //     homeIndex: null
-        // })
+        setState({
+            ...state,
+            homeIndex: null,
+         })
+    
 
 
         // it is the responsibility of your onDrag function to synchronously update your state to reflect the Drag and Drop result
@@ -44,8 +47,8 @@ const App = () => {
         //     return
         // }
         // const column = toDoList.columns[source.droppableId]
-        const start = toDoList.columns[source.droppableId]
-        const finish = toDoList.columns[destination.droppableId]
+        const start = state.columns[source.droppableId]
+        const finish = state.columns[destination.droppableId]
 
         if (start === finish) {
 
@@ -58,12 +61,10 @@ const App = () => {
                 taskIds: newTaskIds,
             }
 
-
-
-            setToDoList({
-                ...toDoList,
+            setState({
+                ...state,
                 columns: {
-                    ...toDoList.columns,
+                    ...state.columns,
                     [newColumn.id]: newColumn,
                 }
             })
@@ -83,31 +84,34 @@ const App = () => {
             taskIds: finishTaskIds,
         }
 
-        const newToDoList = {...toDoList,
+        const newState = {
+            ...state,
         columns: {
-            ...toDoList.columns,
+            ...state.columns,
             [newStart.id]: newStart,
             [newFinish.id]: newFinish,
         }}
 
-        setToDoList(newToDoList)  
+        setState(newState)  
 
     }
 
     return (
         <DragDropContext
-           // onDragStart={onDragStart}
+            onDragStart={onDragStart}
             //onDragUpdate // called when something changes during a drag
             onDragEnd={onDragEnd}
         // called at the end of a drag (this is the ONLY REQUIRED CALLBACK for the DragDropContext)
         >
             <Container>
-                {console.log(initialData.columnOrder)}
-                {initialData.columnOrder.map((columnId) => {
-                    const column = initialData.columns[columnId]
-                    const tasks = column.taskIds.map(taskId => initialData.tasks[taskId])
+                    {/* the columnOrder array stores the order in which we want to render out our columns, so now we're going to map over that in order to render out our columns*/}
+                    {state.columnOrder.map((columnId, index) => {
+                    // pulling the column out of our state
+                    const column = state.columns[columnId]
+                    // getting the tasks associated with that column
+                    const tasks = column.taskIds.map(taskId => state.tasks[taskId])
 
-                    //const isDropDisabled = index < toDoList.homeIndex
+                    const isDropDisabled = index < state.homeIndex
                     // isDropDisabled will be set to true when the index of our map function is less than the index of the column we started the drag in: this will prevent dragging backwards between the columns
 
                     return (
@@ -115,6 +119,7 @@ const App = () => {
                             key={column.id}
                             column={column}
                             tasks={tasks}
+                            isDropDisabled= {isDropDisabled}
                         //    isDropDisabled={isDropDisabled}
                            />
                     )

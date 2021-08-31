@@ -8,7 +8,7 @@ const Container = styled.div`
     margin: 8px;
     border: 1px solid lightgrey;
     border-radius: 2px;
-    width: 220px;
+    //width: 220px;
     display: flex;
     flex-direction: column;`
 
@@ -17,12 +17,13 @@ const Title = styled.h3`
     padding: 8px`
 
 const TaskList = styled.div`
+    display: flex;
     div:hover {cursor: pointer};
     padding: 8px;
     transition: background-color 0.2s ease;
     background-color: ${props => (props.isDraggingOver ? "lightgreen" : "white")};
     flex-grow: 1;
-    min-height: 100px;
+    //min-height: 100px;
     `
  
  const Column = props => {
@@ -34,7 +35,9 @@ const TaskList = styled.div`
                 {/* Droppable has one required prop: a droppable id that needs to be unique within the DragDropContext*/}
             <Droppable
                 droppableId={props.column.id}
-                //isDropDisabled = {props.isDropDisabled}
+                isDropDisabled = {props.isDropDisabled}
+                direction="horizontal"
+                //direction is an optional prop that is vertical by default
                 //type={props.column.id === 'column-3' ? 'done' : 'active '} // here, I am conditionally assigning the type of the droppable based on the id of the column
                 // you can provide an optional type prop to a droppable: a draggable can only be dropped into a droppable that shares the same type as the droppable it started in
                 >

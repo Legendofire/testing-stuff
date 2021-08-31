@@ -32,8 +32,12 @@ const TaskList = styled.div`
         <Container>
             <Title>{props.column.title}</Title>
                 {/* Droppable has one required prop: a droppable id that needs to be unique within the DragDropContext*/}
-            <Droppable droppableId={props.column.id}>
-            {/* Droppable expects its child to be a function that returns a react component*/}
+            <Droppable
+                droppableId={props.column.id}
+                isDropDisabled={props.isDropDisabled}
+                //type={props.column.id === 'column-3' ? 'done' : 'active'}
+                >
+                {/* Droppable expects its child to be a function that returns a react component*/}
                 {(provided, snapshot) => (
                     // the first argument to this function is called "provided", which is an object that serves a few important purposes. The provider object has a property called "droppableProps": these are props that need to be applied to the component that you want to designate as your droppable 
                     <TaskList

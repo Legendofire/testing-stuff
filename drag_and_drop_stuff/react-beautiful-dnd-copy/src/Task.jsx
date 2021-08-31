@@ -22,7 +22,8 @@ const Container = styled.div`
 
 const Task = props => {
     return (
-        <Draggable draggableId={props.task.id} index={props.index}>
+        <Draggable 
+            draggableId={props.task.id} index={props.index}>
             {/* Draggable also expects its child to be a function */}
             {(provided, snapshot) => (
                 <Container
