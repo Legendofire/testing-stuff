@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import "@atlaskit/css-reset"
 import styled from 'styled-components'
 import { DragDropContext } from 'react-beautiful-dnd'
@@ -10,15 +10,31 @@ const Container = styled.div`
 `
 
 const App = () => {
-   
-    const [state, setState] = useState(initialData)
-    
-    const onDragEnd = result => {
-    // it is the responsibility of your onDrag function to synchronously update your state to reflect the Drag and Drop result
-        const  {destination, source, draggableId} = result
 
-        if(!destination){
-        return
+
+    const [toDoList, setToDoList] = useState(initialData)
+
+    // const onDragStart = start => {
+    //     const homeIndex = initialData.columnOrder.indexOf(start.source.droppableId)
+        
+
+    //     setToDoList({
+    //         homeIndex,
+    //     })
+    // }
+
+    const onDragEnd = result => {
+
+        // setToDoList({
+        //     homeIndex: null
+        // })
+
+
+        // it is the responsibility of your onDrag function to synchronously update your state to reflect the Drag and Drop result
+        const { destination, source, draggableId } = result
+
+        if (!destination) {
+            return
         }
 
         // if (
@@ -27,28 +43,31 @@ const App = () => {
         // ) {
         //     return
         // }
-        // const column = state.columns[source.droppableId]
-        const start = state.columns[source.droppableId]
-        const finish = state.columns[destination.droppableId]
+        // const column = toDoList.columns[source.droppableId]
+        const start = toDoList.columns[source.droppableId]
+        const finish = toDoList.columns[destination.droppableId]
 
         if (start === finish) {
 
             const newTaskIds = Array.from(start.taskIds)
             newTaskIds.splice(source.index, 1) // this means: from the index "source.index", we want to remove 1 item
             newTaskIds.splice(destination.index, 0, draggableId) // this means: from the index "destination.index" I am going to remove nothing (0) and I am going to add the draggableId
-        
+
             const newColumn = {
                 ...start,
                 taskIds: newTaskIds,
             }
 
-            setState({          
-                ...state,
-                columns:{
-                  ...state.columns,
-                [newColumn.id]: newColumn, 
+
+
+            setToDoList({
+                ...toDoList,
+                columns: {
+                    ...toDoList.columns,
+                    [newColumn.id]: newColumn,
                 }
-            })}
+            })
+        }
         // Moving from one list to another
         const startTaskIds = Array.from(start.taskIds)
         startTaskIds.splice(source.index, 1)
@@ -64,39 +83,44 @@ const App = () => {
             taskIds: finishTaskIds,
         }
 
-        setState({
-            ...state,
-            columns: {
-                ...state.columns,
-                [newStart.id]: newStart, 
-                [newFinish.id]: newFinish,
-            }
+        const newToDoList = {...toDoList,
+        columns: {
+            ...toDoList.columns,
+            [newStart.id]: newStart,
+            [newFinish.id]: newFinish,
+        }}
 
-        })
-      }
+        setToDoList(newToDoList)  
 
-    
+    }
 
     return (
-    <DragDropContext
-        //onDragStart
-        //onDragUpdate // called when something changes during a drag
-        onDragEnd={onDragEnd}
+        <DragDropContext
+           // onDragStart={onDragStart}
+            //onDragUpdate // called when something changes during a drag
+            onDragEnd={onDragEnd}
         // called at the end of a drag (this is the ONLY REQUIRED CALLBACK for the DragDropContext)
-    >
-        <Container>
+        >
+            <Container>
+                {console.log(initialData.columnOrder)}
+                {initialData.columnOrder.map((columnId) => {
+                    const column = initialData.columns[columnId]
+                    const tasks = column.taskIds.map(taskId => initialData.tasks[taskId])
 
+                    //const isDropDisabled = index < toDoList.homeIndex
+                    // isDropDisabled will be set to true when the index of our map function is less than the index of the column we started the drag in: this will prevent dragging backwards between the columns
 
-    {state.columnOrder.map(columnId => {
-        const column = state.columns[columnId]
-        const tasks = column.taskIds.map(taskId => state.tasks[taskId])
-        
-        return (
-            <Column key={column.id} column={column} tasks={tasks}/>
-            )
-        })}
-        </Container>
-    </DragDropContext>
+                    return (
+                        <Column
+                            key={column.id}
+                            column={column}
+                            tasks={tasks}
+                        //    isDropDisabled={isDropDisabled}
+                           />
+                    )
+                })}
+            </Container>
+        </DragDropContext>
     )
 }
 
@@ -104,13 +128,13 @@ export default App
 
 // class App extends React.Component{
 
-//     state = initialData;
+//     toDoList = initialData;
 
 //     render(){
 
-//         return this.state.columnOrder.map(columnId => {
-//             const column = this.state.columns[columnId]
-//             const tasks = column.taskIds.map(taskId => this.state.tasks[taskId])
+//         return this.toDoList.columnOrder.map(columnId => {
+//             const column = this.toDoList.columns[columnId]
+//             const tasks = column.taskIds.map(taskId => this.toDoList.tasks[taskId])
 
 //             return <Column key={column.id} column={column} tasks={tasks}/>
 //         })

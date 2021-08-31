@@ -2,7 +2,7 @@ const initialData = {
     tasks: {
         "task-1": { id: "task-1", content: "Arrumar a entrada" },
         "task-2": { id: "task-2", content: "Arrumar sofá" },
-        "task-3": { id: "task-3", content: "Descongelar fígado" },
+        "task-3": { id: "task-3", content: "Levar reciclagem" },
         "task-4": { id: "task-4", content: "Fazer jantar" }
     },
     columns: {

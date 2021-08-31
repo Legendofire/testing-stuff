@@ -5,6 +5,7 @@ const initialData = {
         "task-3": { id: "task-3", content: "Descongelar fígado" },
         "task-4": { id: "task-4", content: "Fazer jantar" }
     },
+    originColumn: ["originColumn"],
     columns: {
         "column-1": {
             id: "column-1",
