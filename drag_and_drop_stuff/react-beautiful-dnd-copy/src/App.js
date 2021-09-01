@@ -107,7 +107,7 @@ const App = () => {
             taskId => state.tasks[taskId],
             )
         
-        const isDropDisabled = index < state.homeIndex
+        const isDropDisabled = index > state.homeIndex
 
         return (
             <Column
