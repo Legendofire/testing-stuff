@@ -1,1 +1,0 @@
-[Drag and Drop Tutorial with React DnD (Trello Clone)](https://www.youtube.com/watch?v=aK2PD_REk7A&t=513s)
