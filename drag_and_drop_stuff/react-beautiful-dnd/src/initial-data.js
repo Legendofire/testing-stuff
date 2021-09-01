@@ -1,9 +1,11 @@
+import {v4} from "uuid"
+
 const initialData = {
     tasks: {
-        "task-1": { id: "task-1", content: "Arrumar a entrada" },
-        "task-2": { id: "task-2", content: "Arrumar sofá" },
-        "task-3": { id: "task-3", content: "Levar reciclagem" },
-        "task-4": { id: "task-4", content: "Fazer jantar" }
+        "task-1": { id: v4(), content: "Arrumar a entrada" },
+        "task-2": { id: v4(), content: "Arrumar sofá" },
+        "task-3": { id: v4(), content: "Levar reciclagem" },
+        "task-4": { id: v4(), content: "Fazer jantar" }
     },
     columns: {
         "column-1": {

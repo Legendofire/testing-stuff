@@ -1,5 +1,6 @@
  import React from 'react'
  import styled from "styled-components"
+ import {v4} from "uuid"
  import {Droppable} from "react-beautiful-dnd"
  import Task from "./Task"
 
@@ -35,7 +36,7 @@ const TaskList = styled.div`
                 {/* Droppable has one required prop: a droppable id that needs to be unique within the DragDropContext*/}
             <Droppable
                 droppableId={props.column.id}
-                isDropDisabled = {props.isDropDisabled}
+                // isDropDisabled = {props.isDropDisabled}
                 direction="horizontal"
                 //direction is an optional prop that is vertical by default
                 //type={props.column.id === 'column-3' ? 'done' : 'active '} // here, I am conditionally assigning the type of the droppable based on the id of the column
@@ -49,11 +50,16 @@ const TaskList = styled.div`
                     ref={provided.innerRef} {...provided.droppableProps}
                     isDraggingOver={snapshot.isDraggingOver}
                     >
-                        {props.tasks.map((task, index) => (
-                            <Task key={task.id} task={task} index={index}/> 
-                            ))}
+                        {props.tasks.map((task, index) => {
+                          //console.log(task.id)
+                            return (
+                            <Task key={v4()} task={task} index={index}/>
+                            )
+                        }
+                        )}
                         {/* a placeholder is a react element used to increase the available space in a droppable during a drag when it's needed: the placeholder needs to be added as a child of the component that you designate as the droppable */}
                         {provided.placeholder}
+                 
                     </TaskList>
                 )}
             </Droppable>

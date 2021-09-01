@@ -109,7 +109,7 @@ const App = () => {
                     // pulling the column out of our state
                     const column = state.columns[columnId]
                     // getting the tasks associated with that column
-                    const tasks = column.taskIds.map(taskId => state.tasks[taskId])
+                    const tasks = column.taskIds.map((taskId) => state.tasks[taskId])
 
                     const isDropDisabled = index < state.homeIndex
                     // isDropDisabled will be set to true when the index of our map function is less than the index of the column we started the drag in: this will prevent dragging backwards between the columns
@@ -120,7 +120,7 @@ const App = () => {
                             column={column}
                             tasks={tasks}
                             isDropDisabled= {isDropDisabled}
-                        //    isDropDisabled={isDropDisabled}
+                        
                            />
                     )
                 })}

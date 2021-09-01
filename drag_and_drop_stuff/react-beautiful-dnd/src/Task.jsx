@@ -39,14 +39,14 @@ const Container = styled.div`
 //     margin-right: 8px;
 //     :hover {cursor: pointer};`
 
-const Task = props => {
-    const isDragDisabled = props.task.id === 'task-1'
+const Task = ({id, index, content}) => {
+   //const isDragDisabled = props.task.id === 'task-1'
 
     return (
         <Draggable
-        draggableId={props.task.id}
-        index={props.index}
-        isDragDisabled={isDragDisabled}
+        draggableId={id}
+        index={index}
+       // isDragDisabled={isDragDisabled}
         //isDragDisabled={props.task.id === 'task-1'} // this disables the drag when the task.id is 'task-1'
         // if isDragDisabled is set to true, it prevents the element from being draggable 
         >
@@ -58,11 +58,12 @@ const Task = props => {
                 ref={provided.innerRef}
                 isDragging={snapshot.isDragging}
                 // here, we are passing a prop called isDragging to my styled component which has the value of the snapshot.isDragging property; using the styled-components API, I can conditionally set the background-colour of the component based on this prop
-                isDragDisabled={isDragDisabled}
+               // isDragDisabled={isDragDisabled}
                 >
                 {/* <Handle {...provided.dragHandleProps} */}
 
-                {props.task.content[0]}
+                {content}
+                {console.log(id)}
                 {/* just prints out the first character of the task */}
             </Container>)}
         </Draggable>
