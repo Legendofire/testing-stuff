@@ -12,11 +12,11 @@ const initialData = {
             title: "To do",
             taskIds:["task-1", "task-2", "task-3", "task-4",]
         },
-        "column-2": {
-            id: "column-2",
-            title: "In Progress",
-            taskIds:[]
-            },
+        // "column-2": {
+        //     id: "column-2",
+        //     title: "In Progress",
+        //     taskIds:[]
+        //     },
         "column-3": {
             id: "column-3",
             title: "Done",
@@ -24,7 +24,7 @@ const initialData = {
                 }
     },
     // Facilitate reordering of the columns
-    columnOrder: ["column-1", "column-2", "column-3"] // this is the property that will be used to record the order of the columns
+    columnOrder: ["column-1", "column-3"] // this is the property that will be used to record the order of the columns
 }
 
 export default initialData

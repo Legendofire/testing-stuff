@@ -4,14 +4,6 @@ import styled from 'styled-components'
 import { DragDropContext } from 'react-beautiful-dnd'
 import initialData from "./initial-data"
 import Column from "./Column"
-import OriginColumn from './OriginColumn'
-
-const MainContainer = styled.div`
-    display: flex;
-    `
-    // margin: 8px;
-    // border: 1px solid lightgrey;
-    // border-radius: 2px;
     
 const Container = styled.div`
     display: flex;`
@@ -105,8 +97,7 @@ const App = () => {
         onDragEnd={onDragEnd}
         // called at the end of a drag (this is the ONLY REQUIRED CALLBACK for the DragDropContext)
     >   
-        <MainContainer>
-        <OriginColumn/>
+
         <Container>
 
 
@@ -127,7 +118,7 @@ const App = () => {
             )
         })}
         </Container>
-        </MainContainer>
+        
     </DragDropContext>
     )
 }
