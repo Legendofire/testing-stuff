@@ -5,46 +5,54 @@ import { v4 } from 'uuid'
 
 const itemsFromBackEnd = [
   { id: v4(), content: 'First Task' },
-  { id: v4(), content: 'Second Task' },
-  { id: v4(), content: 'Third Task' },
-  { id: v4(), content: 'Fourth Task' },
-  { id: v4(), content: 'Fifth Task' },
 ]
 
-const columnsFromBackend = {
-  [v4()]: { // every column is gonna need a unique id
-    name: ' To Do',
+const circlesFromBackend = {
+  [v4()]: { // every circle is gonna need a unique id
     items: itemsFromBackEnd,
   },
-  [v4()]: { // every column is gonna need a unique id
-    name: ' In Progress',
+  [v4()]: { // every circle is gonna need a unique id
     items: [],
   },
-  [v4()]: { // every column is gonna need a unique id
-    name: ' Requested ',
+  [v4()]: { // every circle is gonna need a unique id
     items: [],
   },
-  [v4()]: { // every column is gonna need a unique id
-    name: 'Done',
+  [v4()]: { // every circle is gonna need a unique id
+    items: [],
+  },
+  [v4()]: { // every circle is gonna need a unique id
+    items: [],
+  },
+  [v4()]: { // every circle is gonna need a unique id
+    items: [],
+  },
+  [v4()]: { // every circle is gonna need a unique id
+    items: [],
+  },
+  [v4()]: { // every circle is gonna need a unique id
     items: [],
   }
 }
 
-const onDragEnd = (result, columns, setColumns) => {
+const originalCircle = {
+  id: v4()
+}
+
+const onDragEnd = (result, circles, setCircles) => {
 
   if (!result.destination) return
 
   const { source, destination } = result
 
   if (source.droppableId !== destination.droppableId) {
-    const sourceColumn = columns[source.droppableId]
-    const destColumn = columns[destination.droppableId]
+    const sourceColumn = circles[source.droppableId]
+    const destColumn = circles[destination.droppableId]
     const sourceItems = [...sourceColumn.items]
     const destItems = [...destColumn.items]
     const [removed] = sourceItems.splice(source.index, 1)
     destItems.splice(destination.index, 0, removed)
-    const newColumn = {
-      ...columns,
+    const newCircle = {
+      ...circles,
       [source.droppableId]: {
         ...sourceColumn,
         items: sourceItems
@@ -54,85 +62,128 @@ const onDragEnd = (result, columns, setColumns) => {
         items: destItems
       }
     }
-    setColumns(newColumn)
+    setCircles(newCircle)
   } else {
-    const column = columns[source.droppableId]
-    const copiedItems = [...column.items] // this way, we are not messing up with our original state array
+    const circle = circles[source.droppableId]
+    const copiedItems = [...circle.items] // this way, we are not messing up with our original state array
     const [removed] = copiedItems.splice(source.index, 1)
     copiedItems.splice(destination.index, 0, removed)
-    const newColumn = {
-      ...columns,
+    const newCircle = {
+      ...circles,
       [source.droppableId]: {
-        ...column,
+        ...circle,
         items: copiedItems
-      }
+      },
     }
-    setColumns(newColumn)
+    setCircles(newCircle)
   }
 }
 
 function App() {
 
-  const [columns, setColumns] = useState(columnsFromBackend)
+  const [circles, setCircles] = useState(circlesFromBackend)
 
   return (
 
     <div
       style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4 1fr)',
-        gridTemplateRows: 'auto',
-        gridTemplateAreas: `
-          "progress-bar progress-bar progress-bar"
-          `,
-        height: '75%',
+        margin:0,
+        padding: 0,
         width: '100%',
+        height: '100%',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(10, 1fr)',
+        gridTemplateRows: 'repeat(10, 1fr)',
         border: 'solid 3px red',
       }}>
+      <div
+        className='top-bar'
+        style={{
+          gridColumn: '1/11',
+          gridRow: '1/3',
+          border: 'solid 3px purple',
+        }}
+      >
 
+      </div>
+
+      <div
+        className='progress-bar'
+        style={{
+          gridColumn: '1/9',
+          gridRow: '3/4',
+          border: 'dashed 3px blue',
+        }}
+      >Progress Bar component
+      </div>
+      <div
+        className='controller'
+        style={{
+          gridColumn: '9/11',
+          gridRow: '3/11',
+          border: 'dashed 3px green',
+        }}
+      >Controller component </div>
+   
+          
+      <DragDropContext
+        onDragEnd={result => onDragEnd(result, circles, setCircles)}
+      >
+        <div
+        className='drag-drop-context'
+        style={{
+          gridColumn: '1/9',
+          gridRow: '4/11',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(6, 1fr)',
+          border: 'dashed 3px orange',
+        }}>
         <div
           style={{
-            gridArea: 'progress-bar',
-            border: 'solid 3px blue',
-            width: '100%',
-            height: '25%'
-
-        }}></div>
-
-      <DragDropContext
-        onDragEnd={result => onDragEnd(result, columns, setColumns)}
-
-      >
-        {Object.entries(columns).map(([id, column]) => {
+            gridColumn: '1/5',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            border: 'solid 2px grey'
+          }}>
+        {Object.entries(circles).map(([id, circle]) => {
           return (
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center'
-            }}>
+          //each circle where the picture can be dropped into
               <div style={{
-                margin: 8
+                border: 'solid 2px pink',
+                justifySelf: 'center',
+                alignSelf: 'center',
               }}
               >
                 <Droppable
                   droppableId={id}
                   key={id}
                 >
-                  {(provided, snapshot) => {
-                    return (
+                {(provided, snapshot) => {
+                    return (   
+                      <div>
                       <div
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={{
                           backgroundColor: snapshot.isDraggingOver ? 'lightsteelblue' : 'lightgreen',
+                          //gridColumns: '1/5',
                           padding: 4,
-                          width: 150,
-                          height: 150,
-                          borderRadius: 150,
+                          width: 60,
+                          height: 60,
+                          borderRadius: 60,
                         }}
                       >
-                        {column.items.map((item, index) => {
+                        {circle.items.map((item, index) => {
                           return (
+                            <div
+                              className='draggable'
+                              style={{
+                                display: 'grid',
+                                backgroundColor: 'black'
+                              }}
+                              >
+
+                            
                             <Draggable
                               key={item.id}
                               draggableId={item.id} //draggableId needs to be a string
@@ -147,40 +198,62 @@ function App() {
                                     style={{
                                       userSelect: 'none',
                                       padding: 16,
-                                      margin: '0 0 8px 0',
-                                      minHeight: '50px',
-                                      backgroundColor: snapshot.isDragging ? '#263B4A' : '#456C86',
+                                      margin: 'auto',
+                                      height: '50px',
+                                      width: '50px',
+                                      borderRadius: '50px',
+                                      backgroundColor: snapshot.isDragging ? 'purple' : '#456C86',
                                       color: 'white',
                                       ...provided.draggableProps.style
                                     }}
                                   >
-                                    {item.content}
+                                    {item.content} LALA
                                   </div>
+                                  
                                 )
                               }}
                             </Draggable>
+                            </div>
                           )
                         })}
                         {provided.placeholder}
                       </div>
+                      <div>OLA</div>
+                      </div>               
+                    )
+                  }}
+                  
+                </Droppable>
+                <Droppable
+                droppableId={originalCircle.id}
+                key={originalCircle.id}
+                >
+                  {(provided, snapshot) => {
+                    return (  
+                      <div 
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                        style={{
+                          backgroundColor: snapshot.isDraggingOver ? 'lightgoldenrodyellow' : 'lightcoral',
+                          padding: 4,
+                          width: 60,
+                          height: 60,
+                          borderRadius: 60,
+                        }}
+                        >
+                          {provided.placeholder}
+                        </div>
                     )
                   }}
                 </Droppable>
               </div>
-            </div>
+            
           )
         })}
-
-      </DragDropContext>
-      <div
-        style={{
-          width: '25%',
-          height: '100%',
-          gridArea: '1 | col4-start | last-line | 5',
-          border: 'solid 2px purple'
-        }}
-      >
+        </div>
       </div>
+      </DragDropContext>
+
     </div>
   );
 }

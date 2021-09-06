@@ -5,8 +5,14 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Aligning & Justifying Items</title>
+        <title>Using Grid for game 2 on elearning project</title>
         <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
             body {
                 color: #fff;
                 font-family: 'Nunito Semibold';
@@ -16,42 +22,52 @@
             #content {
                 /* this is the grid wrapper */
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                grid-auto-rows: minmax(150px, auto);
+                grid-template-columns: repeat(7, 1fr);
                 gap: 10px;
-                max-width: 960px;
+                max-width: 100%;
+                max-height: 100%;
                 margin: 0 auto;
-                font-size: 25px;
-                /*  ALIGN is UP-DOWN (VERTICAL)
-                    JUSTIFY is LEFT-RIGHT(HORIZONTAL) */
-                /* align-items: start; */
-                /* all items go to the top of the row */
-                /* align-items: stretch ----> this is the default value if we don't specify another value*/
-                /* justify-items: end; */
             }
 
             #content div {
                 background: #3bbced;
-                padding: 30px;
+                padding: 20px;
             }
 
             #content div:nth-child(even) {
                 background: #777;
             }
 
-            .one {
-                align-self: end;
-                justify-self: end;
+            .progress-bar {
+                grid-column: 1/7;
             }
 
-            .two {
-                align-self: center;
-                justify-self: center;
+            .nested {
+                /* grid-column: 1 / 4; ---> the same effect can be obtained with the span keyword, as seen below */
+                grid-column: 1/6;
+                /* how many columns this div occupies */
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                /* how many columns this div has nested inside it and how wide they are */
+                gap: 10px;
             }
 
-            .three {
-                align-self: start;
-                justify-self: start;
+            .nested p {
+                border: 1px solid #fff;
+                width: 4.5rem;
+                height: 4.5rem;
+                border-radius: 50%;
+                margin: auto;
+            }
+
+            .main-circle {
+                border: 1px solid #fff;
+                padding: 20px;
+                width: 6rem;
+                height: 6rem;
+                border-radius: 50%;
+                margin: auto;
+
             }
         </style>
     </head>
@@ -60,13 +76,18 @@
 
         <div id="content">
             <!-- this is gonna serve us the actual grid, like a grid wrapper -->
-            <div class="one">1</div>
-            <div class="two">2</div>
-            <div class="three">3</div>
-            <div class="four">4</div>
-            <div class="five">5</div>
-            <div class="six">6</div>
-        </div>
+            <div class="progress-bar">Progress Bar</div>
+            <div class="nested">
+                <!-- this is the wrapper for gridding these items -->
+                <p>a</p>
+                <p>b</p>
+                <p>c</p>
+                <p>d</p>
+                <p>e</p>
+                <p>f</p>
+            </div>
+            <div class="main-circle">Main Circle</div>
+
 
     </body>
 
