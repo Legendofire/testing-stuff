@@ -34,9 +34,7 @@ const circlesFromBackend = {
   }
 }
 
-const originalCircle = {
-  id: v4()
-}
+
 
 const onDragEnd = (result, circles, setCircles) => {
 
@@ -136,7 +134,7 @@ function App() {
           gridRow: '4/11',
           display: 'grid',
           gridTemplateColumns: 'repeat(6, 1fr)',
-          border: 'dashed 3px orange',
+          border: 'dotted 3px orange',
         }}>
         <div
           style={{
@@ -157,6 +155,7 @@ function App() {
                 <Droppable
                   droppableId={id}
                   key={id}
+                  type='CIRCLE'             
                 >
                 {(provided, snapshot) => {
                     return (   
@@ -196,7 +195,7 @@ function App() {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     style={{
-                                      userSelect: 'none',
+                                      // userSelect: 'none',
                                       padding: 16,
                                       margin: 'auto',
                                       height: '50px',
@@ -219,14 +218,15 @@ function App() {
                         {provided.placeholder}
                       </div>
                       <div>OLA</div>
-                      </div>               
+                      </div>                
                     )
                   }}
                   
                 </Droppable>
                 <Droppable
-                droppableId={originalCircle.id}
-                key={originalCircle.id}
+                droppableId={v4()}
+                key= {v4()}
+                type='CIRCLE'
                 >
                   {(provided, snapshot) => {
                     return (  
