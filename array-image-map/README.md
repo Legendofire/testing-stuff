@@ -1,0 +1,1 @@
+# Mapping through an array of images in React
