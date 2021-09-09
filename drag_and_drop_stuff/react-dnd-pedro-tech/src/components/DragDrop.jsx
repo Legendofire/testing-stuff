@@ -21,6 +21,9 @@ const PictureList = [
     }
 ]
 
+
+
+
 const DragDrop = () => {
 
     const [board, SetBoard] = useState([])
