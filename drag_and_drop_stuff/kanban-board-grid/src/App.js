@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import forty from './forty.jpg'
 import { v4 } from 'uuid'
 
 
@@ -172,7 +173,7 @@ function App() {
                           borderRadius: 60,
                         }}
                       >
-                        {circle.items.map((item, index) => {
+                        {/* {circle.items.map((item, index) => {
                           return (
                             <div
                               className='draggable'
@@ -214,7 +215,7 @@ function App() {
                             </Draggable>
                             </div>
                           )
-                        })}
+                        })} */}
                         {provided.placeholder}
                       </div>
                       <div>OLA</div>
@@ -223,7 +224,7 @@ function App() {
                   }}
                   
                 </Droppable>
-                <Droppable
+                {/* <Droppable
                 droppableId={v4()}
                 key= {v4()}
                 type='CIRCLE'
@@ -245,13 +246,53 @@ function App() {
                         </div>
                     )
                   }}
-                </Droppable>
+                </Droppable> */}
               </div>
             
           )
         })}
         </div>
-      </div>
+        {/* <div
+          style={{
+            backgroundColor: 'lightcoral',
+            gridColumn: '5/9',
+            height: '200px',
+            borderRadius: '50%'
+          }}
+        >LALA */}
+ <Draggable
+                              
+                              draggableId='1' //draggableId needs to be a string
+                              // this will tell us what index we're dragging from and dropping to
+                            >
+                              {(provided, snapshot) => {
+                                return (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    style={{
+                                      // userSelect: 'none',
+                                      padding: 16,
+                                      margin: 'auto',
+                                      height: '50px',
+                                      width: '50px',
+                                      borderRadius: '50px',
+                                      backgroundColor: snapshot.isDragging ? 'purple' : '#456C86',
+                                      color: 'white',
+                                      ...provided.draggableProps.style
+                                    }}
+                                  >
+       
+                                    <img src={forty} alt="LALA" style={{height: '200px', borderRadius: '50%'}}/>
+                                  </div>
+                                  
+                                )
+                              }}
+                            </Draggable>
+
+        </div>
+      {/* </div> */}
       </DragDropContext>
 
     </div>

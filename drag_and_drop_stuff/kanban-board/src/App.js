@@ -33,7 +33,7 @@ const columnsFromBackend = {
 const onDragEnd = (result, columns, setColumns) => {
 
   if (!result.destination) return
-
+  
   const { source, destination } = result
 
   if (source.droppableId !== destination.droppableId) {

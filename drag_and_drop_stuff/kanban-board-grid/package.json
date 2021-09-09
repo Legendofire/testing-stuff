@@ -1,5 +1,5 @@
 {
-  "name": "kanban-board",
+  "name": "kanban-board-grid",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
