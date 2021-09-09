@@ -33,9 +33,9 @@ const DragDrop = () => {
         drop: (item) => addImageToBoard(item.id),
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
+            })
         })
-    
-    }))
+    )
 
     const addImageToBoard = (id) => {
         const pictureList = PictureList.filter(picture => id === picture.id)
@@ -45,7 +45,9 @@ const DragDrop = () => {
 
     return (
         <Fragment>
-            <div className= 'Pictures'>
+            <div
+                className= 'Pictures'
+            >
                 {PictureList.map(picture => {
                     return (
                     <Picture
@@ -59,6 +61,11 @@ const DragDrop = () => {
             <div
                 className= 'Board'
                 ref={drop}
+                style={{
+                    backgroundColor: isOver ? 'lightcoral' : 'red',
+                    transition: '0.25s'
+            }}
+
             >
                 {board.map(picture => {
                     return <Picture url={picture.url} id={picture.id}/>

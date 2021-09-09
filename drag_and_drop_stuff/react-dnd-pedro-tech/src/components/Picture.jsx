@@ -16,9 +16,11 @@ const Picture = ({id, url}) => {
         <img
             ref={drag}
             src={url}
+            alt="women dancing"
             height='250px'
             style={{
-                border: isDragging && '5px solid pink'
+                // border: isDragging && '5px solid pink',
+                opacity: isDragging && 0,
             }}
         />
             
