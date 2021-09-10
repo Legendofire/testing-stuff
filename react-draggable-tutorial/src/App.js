@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Draggable from 'react-draggable';
 
-function App() {
+const App = () => {
+  const eventControl = (event, info) => {
+    console.log('Event name: ', event.type);
+    console.log(event, info);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Draggable
+    onDrag={eventControl}
+    onStart={eventControl}
+    onStop={eventControl}
+    onMouseDown={eventControl}
+    onMouseUp={eventControl}
+    onTouchStart={eventControl}
+    onTouchEnd={eventControl}>
+  <div className="drag-wrapper">
+    <div>You can drag me now.</div>
+  </div>
+</Draggable>
+  )
 }
 
-export default App;
+export default App

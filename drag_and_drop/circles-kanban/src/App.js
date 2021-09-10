@@ -15,19 +15,23 @@ const columnsFromBackend = {
   [v4()]: { // every column is gonna need a unique id
     name: ' To Do',
     items: itemsFromBackEnd,
+    width: '15%'
   },
   [v4()]: { // every column is gonna need a unique id
     name: ' In Progress',
     items: [],
+    width: '15%'
   },
   [v4()]: { // every column is gonna need a unique id
     name: ' Requested ',
     items: [],
+    width: '15%'
   },
   [v4()]: { // every column is gonna need a unique id
     name: 'Done',
     items: [],
-   }
+    width: '600px'
+  }
 }
 
 const onDragEnd = (result, columns, setColumns) => {
@@ -86,13 +90,16 @@ function App() {
         onDragEnd={result => onDragEnd(result, columns, setColumns)}
       >
         {Object.entries(columns).map(([id, column]) => {
+          
+          const divStyle = {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: column.width
 
+          }
           return (
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              }}>
+            <div style={divStyle}>
               <h2 style={{
                 paddingTop: 20
               }}>
