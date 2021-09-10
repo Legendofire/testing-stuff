@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.2/lib/draggable.min.js"></script>
+        <title>Draggable</title>
+        <style>
+            .grid {
+                display: grid;
+                grid-template: 150px 150px 150px / 150px 150px 150px 150px;
+                grid-gap: 10px;
+                background-color: #ffffff;
+                padding: 10px;
+            }
+
+            .draggable {
+                background-color: #ff3946;
+                box-shadow: 10px 10px 10px #7777;
+            }
+
+            .draggable,
+            .droppable.draggable-dropzone--occupied {
+                width: 100px;
+                height: 100px;
+                border-radius: 100px;
+            }
+
+            .droppable {
+                width: 100px;
+                height: 100px;
+                border: solid;
+                border-radius: 100px;
+                display: flex;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="grid">
+            <div class="block">
+                <div class="droppable draggable-dropzone--occupied">
+                    <div class="draggable"></div>
+                </div>
+            </div>
+
+            <div class="block">
+                <div class="droppable"></div>
+            </div>
+            <div class="block">
+                <div class="droppable"></div>
+            </div>
+            <div class="block">
+                <div class="droppable"></div>
+            </div>
+            <div class="block">
+                <div class="droppable"></div>
+            </div>
+            <div class="block">
+                <div class="droppable"></div>
+            </div>
+            <div class="block">
+                <div class="droppable"></div>
+            </div>
+            <div class="block">
+                <div class="droppable"></div>
+            </div>
+            <div class="block">
+                <div class="droppable"></div>
+            </div>
+            <div class="block">
+                <div class="droppable"></div>
+            </div>
+            <div class="block">
+                <div class="droppable"></div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        const containers = document.querySelectorAll('.block')
+
+        const droppable = new Draggable.Droppable(containers, {
+            draggable: '.draggable',
+            droppable: '.droppable'
+        });
+
+        droppable.on('drag:start', () => console.log('drag:start'));
+        droppable.on('droppable:over', () => console.log('droppable:over'));
+        droppable.on('droppable:out', () => console.log('droppable:out'));
+    </script>
+
+</html>

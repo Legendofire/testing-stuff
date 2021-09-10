@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Board from './components/Board';
+import './index.css';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-      <Board knightPosition = {[7, 4]} />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
