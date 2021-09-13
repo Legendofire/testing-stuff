@@ -1,43 +1,90 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { v4 } from 'uuid'
+import images from './data/data';
 
 
 const itemsFromBackEnd = [
-  { id: v4(), content: 'First Task' },
-  { id: v4(), content: 'Second Task' },
-  { id: v4(), content: 'Third Task' },
-  { id: v4(), content: 'Fourth Task' },
-  { id: v4(), content: 'Fifth Task' },
+  { id: v4(), content: [images] },
+  //   // { id: v4(), content: 'Second Task' },
+  //   // { id: v4(), content: 'Third Task' },
+  //   // { id: v4(), content: 'Fourth Task' },
+  //   // { id: v4(), content: 'Fifth Task' },
 ]
 
 const columnsFromBackend = {
-  [v4()]: { // every column is gonna need a unique id
-    name: ' To Do',
+  [v4()]: {
+    name: 'first',
+    items: [],
+    width: '8rem',
+    height: '8rem',
+    borderRadius: '8rem',
+  },
+  [v4()]: { // every circle is gonna need a unique id
+    name: 'second',
+    items: [],
+    width: '8rem',
+    height: '8rem',
+    borderRadius: '8rem',
+  },
+  [v4()]: { // every circle is gonna need a unique id
+    items: [],
+    width: '8rem',
+    height: '8rem',
+    borderRadius: '8rem',
+  },
+  [v4()]: { // every circle is gonna need a unique id
+    items: [],
+    width: '8rem',
+    height: '8rem',
+    borderRadius: '8rem',
+  },
+  [v4()]: { // every circle is gonna need a unique id
     items: itemsFromBackEnd,
-    width: '15%'
+    width: '10rem',
+    height: '10rem',
+    borderRadius: '10rem',
   },
-  [v4()]: { // every column is gonna need a unique id
-    name: ' In Progress',
+  [v4()]: { // every circle is gonna need a unique id
     items: [],
-    width: '15%'
+    width: '8rem',
+    height: '8rem',
+    borderRadius: '8rem',
   },
-  [v4()]: { // every column is gonna need a unique id
-    name: ' Requested ',
+  [v4()]: { // every circle is gonna need a unique id
     items: [],
-    width: '15%'
+    width: '8rem',
+    height: '8rem',
+    borderRadius: '8rem',
   },
-  [v4()]: { // every column is gonna need a unique id
-    name: 'Done',
+  [v4()]: { // every circle is gonna need a unique id
     items: [],
-    width: '600px'
-  }
+    width: '8rem',
+    height: '8rem',
+    borderRadius: '8rem',
+  },
+  [v4()]: { // every circle is gonna need a unique id
+    items: [],
+    width: '8rem',
+    height: '8rem',
+    borderRadius: '8rem',
+  },
+  // [v4()]: { // every circle is gonna need a unique id
+  //   name: '+',
+  // }}
+
+  // { // every circle is gonna need a unique id
+  //   items: itemsFromBackEnd,
+  //   width: '10rem',
+  //   height: '10rem',
+  //   borderRadius: '10rem',
 }
+
 
 const onDragEnd = (result, columns, setColumns) => {
 
   if (!result.destination) return
-  
+
   const { source, destination } = result
 
   if (source.droppableId !== destination.droppableId) {
@@ -45,7 +92,7 @@ const onDragEnd = (result, columns, setColumns) => {
     const destColumn = columns[destination.droppableId]
     const sourceItems = [...sourceColumn.items]
     const destItems = [...destColumn.items]
-    const[removed] = sourceItems.splice(source.index, 1)
+    const [removed] = sourceItems.splice(source.index, 1)
     destItems.splice(destination.index, 0, removed)
     const newColumn = {
       ...columns,
@@ -82,31 +129,29 @@ function App() {
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        height: '100%'
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr) 1.5fr',
+        gridTemplateRows: 'repeat(2, 1fr)',
+        justifyItems: 'center',
+        alignItems: 'center'
+        //  height: '100%'
       }}>
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns)}
       >
         {Object.entries(columns).map(([id, column]) => {
-          
-          const divStyle = {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: column.width
 
-          }
+
           return (
-            <div style={divStyle}>
-              <h2 style={{
+            <div>
+              {/* <h2 style={{
                 paddingTop: 20
               }}>
                 {column.name}
-              </h2>
+              </h2> */}
               <div style={{
                 margin: 8
+
               }}
               >
                 <Droppable
@@ -121,40 +166,46 @@ function App() {
                         style={{
                           backgroundColor: snapshot.isDraggingOver ? 'lightsteelblue' : 'lightgrey',
                           padding: 4,
-                          width: 250,
-                          minHeight: 500
+                          width: column.width,
+                          height: column.height,
+                          borderRadius: column.borderRadius,
                         }}
+
                       >
+                        {/* {column.name} */}
                         {column.items.map((item, index) => {
-                          return (
-                            <Draggable
-                              key={item.id}
-                              draggableId={item.id} //draggableId needs to be a string
-                              index={index} // this will tell us what index we're dragging from and dropping to
-                            >
-                              {(provided, snapshot) => {
-                                return (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                      userSelect: 'none',
-                                      padding: 16,
-                                      margin: '0 0 8px 0',
-                                      minHeight: '50px',
-                                      backgroundColor: snapshot.isDragging ? '#263B4A' : '#456C86',
-                                      color: 'white',
-                                      ...provided.draggableProps.style
-                                    }}
-                                  >
-                                    {item.content}
-                                  </div>
-                                )
-                              }}
-                            </Draggable>
-                          )
-                        })}
+                          return ( 
+                          <Draggable
+                            key='1'
+                            draggableId='1' //draggableId needs to be a string
+                          //index={index} // this will tell us what index we're dragging from and dropping to
+                          >
+                            {(provided, snapshot) => {
+                              return (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  style={{
+                                    //userSelect: 'none',
+                                    // padding: 16,
+                                    height: '100%',
+                                    width: '100%',
+                                    borderRadius: '50%',
+                                    backgroundColor: snapshot.isDragging ? '#263B4A' : '#456C86',
+                                    color: 'white',
+                                    ...provided.draggableProps.style
+                                  }}
+                                >
+                                </div>
+                              )
+                            }}
+                          </Draggable>
+                           )
+                        }
+                      )
+                    }
+
                         {provided.placeholder}
                       </div>
                     )
