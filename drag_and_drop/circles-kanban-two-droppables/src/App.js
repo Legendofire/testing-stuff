@@ -201,7 +201,7 @@ const App = () => {
                       }}
 
                     >
-                      {/* {column.name} */}
+                      {/* {column.name}
                       {originalCirclesFromBackend.items.map((item, index) => {
                         return (
                           <Draggable
@@ -233,7 +233,7 @@ const App = () => {
                         )
                       }
                       )
-                      }
+                      } */}
 
                       {provided.placeholder}
                     </div>
