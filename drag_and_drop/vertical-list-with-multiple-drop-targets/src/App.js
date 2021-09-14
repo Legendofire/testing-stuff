@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 // fake data generator
-const getItems = (count, offset = 0) =>
-    Array.from({ length: count }, (v, k) => k).map(k => ({
-        id: `item-${k + offset}`,
-        content: `item ${k + offset}`
-    }));
+const initialItems = [
+    {
+        id: '1',
+        content: 'item 1'
+    },
+
+    {
+        id: '2',
+        content: 'item 2'
+    }
+]
+
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -55,48 +62,47 @@ const getListStyle = isDraggingOver => ({
     width: 250
 });
 
-
-
 const App = () => {
-
-    const [items, setItems] = useState(getItems(10))
-    const [selected, setSelected] = useState(getItems(5,10))
     
+    const [items, setItems] = useState()
+    const [selected, setSelected] = useState(initialItems)
+    
+
+
     /**
      * A semi-generic way to handle multiple lists. Matches
      * the IDs of the droppable container to the names of the
      * source arrays stored in the state.
      */
-    
     const id2List = {
         droppable: 'items',
         droppable2: 'selected'
     };
 
+    const getList = id => setItems([id2List[id]]);
 
-    const getList = id => setItems[id2List[id]];
-    
     const onDragEnd = result => {
-        const { source, destination } = result;
+        const { source, destination, items, setItems, selected, setSelected } = result;
+
         // dropped outside the list
         if (!destination) {
             return;
         }
-        
+
         if (source.droppableId === destination.droppableId) {
             const items = reorder(
                 getList(source.droppableId),
                 source.index,
                 destination.index
             );
-        
-            setItems({ items });
-        
+
+            let state = { items };
+
             if (source.droppableId === 'droppable2') {
-                setItems({ selected: items });
+                state = { selected: items };
             }
-        
-            setItems(items);
+
+            setSelected(initialItems);
         } else {
             const result = move(
                 getList(source.droppableId),
@@ -104,16 +110,20 @@ const App = () => {
                 source,
                 destination
             );
-        
-            setItems(result.droppable)
-            setSelected(result.droppable2)
-            };
-        }
-        ;
 
+            setItems({
+                items: result.droppable,
+                selected: result.droppable2
+            });
+        }
+    };
+
+    // Normally you would want to split things out into separate components.
+    // But in this example everything is just done in one place for simplicity
+  
         return (
-            <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="droppable">
+            <DragDropContext onDragEnd={this.onDragEnd}>
+                <Droppable droppableId="droppable" type="CARD">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
@@ -141,44 +151,11 @@ const App = () => {
                         </div>
                     )}
                 </Droppable>
-                <Droppable droppableId="droppable1">
+                <Droppable droppableId="droppable2" type="CARD">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}>
-                            {items.map((item, index) => (
-                                <Draggable
-                                    key={item.id}
-                                    draggableId={item.id}
-                                    index={index}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}>
-                                            {item.content}
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-                <Droppable droppableId="droppable2">
-                    {(provided, snapshot) => (
-                        <div
-                            ref={provided.innerRef}
-                            style={getListStyle(snapshot.isDraggingOver), {
-                            height: '500px',
-                            width: '500px',
-                            borderRadius: '500px',
-                            backgroundColor: 'red'
-                      }}>
                             {selected.map((item, index) => (
                                 <Draggable
                                     key={item.id}
@@ -192,10 +169,7 @@ const App = () => {
                                             style={getItemStyle(
                                                 snapshot.isDragging,
                                                 provided.draggableProps.style
-                                                
-                                            )}
-                                            
-                                            >
+                                            )}>
                                             {item.content}
                                         </div>
                                     )}
@@ -207,12 +181,8 @@ const App = () => {
                 </Droppable>
             </DragDropContext>
         );
-}
+    }
 
-
-    // Normally you would want to split things out into separate components.
-    // But in this example everything is just done in one place for simplicity
-    
-    
 
 export default App
+

@@ -72,12 +72,6 @@ const originalCircle = {
     height: '10rem',
     borderRadius: '10rem',
   },
-  [v4()]: { // every circle is gonna need a unique id
-    items: itemsToDrag,
-    width: '10rem',
-    height: '10rem',
-    borderRadius: '10rem',
-  },
 }
 
 
@@ -181,7 +175,8 @@ const App = () => {
                           <Draggable
                             key={item.id}
                             draggableId={item.id} //draggableId needs to be a string
-                          //index={index} // this will tell us what index we're dragging from and dropping to
+                            type='IMAGE'
+                            index={index} // this will tell us what index we're dragging from and dropping to
                           >
                             {(provided, snapshot) => {
                               return (
