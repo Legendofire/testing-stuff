@@ -208,7 +208,6 @@ const App = () => {
 
               >
                 {/* {column.name} */}
-                {console.log(originalCirclesFromBackend)}
                 {Object.values(originalCirclesFromBackend)[0].items.map((item, index) => {
                   return (
                     <Draggable
