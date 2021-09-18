@@ -23,50 +23,56 @@ const originalCirclesFromBackend = {
 
 const targetCirclesFromBackend = {
   [v4()]: {
-    name: 'first',
+    name: 'col1',
     items: [],
     width: '8rem',
     height: '8rem',
     borderRadius: '8rem',
   },
   [v4()]: { // every circle is gonna need a unique id
-    name: 'second',
+    name: 'col2',
     items: [],
     width: '8rem',
     height: '8rem',
     borderRadius: '8rem',
   },
   [v4()]: { // every circle is gonna need a unique id
+    name: 'col3',
     items: [],
     width: '8rem',
     height: '8rem',
     borderRadius: '8rem',
   },
   [v4()]: { // every circle is gonna need a unique id
+    name: 'col4',
     items: [],
     width: '8rem',
     height: '8rem',
     borderRadius: '8rem',
   },
   [v4()]: { // every circle is gonna need a unique id
+    name: 'col5',
     items: [],
     width: '8rem',
     height: '8rem',
     borderRadius: '8rem',
   },
   [v4()]: { // every circle is gonna need a unique id
+    name: 'col6',
     items: [],
     width: '8rem',
     height: '8rem',
     borderRadius: '8rem',
   },
   [v4()]: { // every circle is gonna need a unique id
+    name: 'col7',
     items: [],
     width: '8rem',
     height: '8rem',
     borderRadius: '8rem',
   },
   [v4()]: { // every circle is gonna need a unique id
+    name: 'col8',
     items: [],
     width: '8rem',
     height: '8rem',
@@ -180,75 +186,74 @@ const App = () => {
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns, originalCirclesFromBackend, setTargetCircles)}
       >
-  
 
-              <Droppable
-                droppableId='droppableId'
-                type= 'circle'
-                key='1'
-              >
-                {(provided, snapshot) => {
-                  return (
-                    <div
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                      style={{
-                        backgroundColor: snapshot.isDraggingOver ? 'lightsteelblue' : 'lightgrey',
-                        padding: 4,
-                        width: '10rem',
-                        height: '10rem',
-                        borderRadius: '10rem',
-                      }}
 
-                    >
-                      {/* {column.name}
-                      {originalCirclesFromBackend.items.map((item, index) => {
-                        return (
-                          <Draggable
-                          key={item.id}
-                          draggableId={item.id} //draggableId needs to be a string
-                          index={index} // this will tell us what index we're dragging from and dropping to
-                          >
-                            {(provided, snapshot) => {
-                              return (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  style={{
-                                    //userSelect: 'none',
-                                    // padding: 16,
-                                    height: '100%',
-                                    width: '100%',
-                                    borderRadius: '50%',
-                                    backgroundColor: snapshot.isDragging ? '#263B4A' : '#456C86',
-                                    color: 'white',
-                                    ...provided.draggableProps.style
-                                  }}
-                                >
-                                </div>
-                              )
-                            }}
-                          </Draggable>
-                        )
-                      }
-                      )
-                      } */}
-
-                      {provided.placeholder}
-                    </div>
-                  )
+        <Droppable
+          droppableId='droppableId'
+          type='circle'
+          key='1'
+        >
+          {(provided, snapshot) => {
+            return (
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                style={{
+                  backgroundColor: snapshot.isDraggingOver ? 'lightsteelblue' : 'lightgrey',
+                  padding: 4,
+                  width: '10rem',
+                  height: '10rem',
+                  borderRadius: '10rem',
                 }}
-              </Droppable>
-            
+
+              >
+                {/* {column.name} */}
+                {console.log(originalCirclesFromBackend)}
+                {Object.values(originalCirclesFromBackend)[0].items.map((item, index) => {
+                  return (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id} //draggableId needs to be a string
+                      index={index} // this will tell us what index we're dragging from and dropping to
+                    >
+                      {(provided, snapshot) => {
+                        return (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={{
+                              //userSelect: 'none',
+                              // padding: 16,
+                              height: '100%',
+                              width: '100%',
+                              borderRadius: '50%',
+                              backgroundColor: snapshot.isDragging ? '#263B4A' : '#456C86',
+                              color: 'white',
+                              ...provided.draggableProps.style
+                            }}
+                          >
+                          </div>
+                        )
+                      }}
+                    </Draggable>
+                  )
+                }
+                )
+                }
+
+                {provided.placeholder}
+              </div>
+            )
+          }}
+        </Droppable>
+
 
           )
-        
+
         {Object.entries(targetCircles).map(([id, circle]) => {
-
-
           return (
-            <div 
+            <div
               key={id}
               style={{
                 margin: 8
@@ -258,7 +263,7 @@ const App = () => {
               <Droppable
                 droppableId={id}
                 key={id}
-                type= 'circle'
+                type='circle'
               >
                 {(provided, snapshot) => {
                   return (
@@ -289,8 +294,6 @@ const App = () => {
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}
                                   style={{
-                                    //userSelect: 'none',
-                                    // padding: 16,
                                     height: '100%',
                                     width: '100%',
                                     borderRadius: '50%',
